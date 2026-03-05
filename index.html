@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة العاشر - المنهج الكويتي</title>
+    <style>
+        :root {
+            --kuwait-red: #ce1126;
+            --kuwait-green: #007a3d;
+            --kuwait-black: #000000;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* شاشة تسجيل الدخول */
+        #login-screen {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 5px solid var(--kuwait-green);
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: var(--kuwait-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            display: none;
+            width: 95%;
+            max-width: 1200px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .header-kwt {
+            background: linear-gradient(to left, var(--kuwait-green), var(--kuwait-red));
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .files-section iframe {
+            width: 100%;
+            height: 500px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+        }
+
+        /* صندوق الدردشة */
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            background: #fafafa;
+        }
+
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .ai-msg { background: #e1ffc7; padding: 8px; border-radius: 5px; margin: 5px 0; }
+        .user-msg { background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 5px; margin: 5px 0; text-align: left; }
+
+        .chat-input-area { display: flex; padding: 10px; }
+        .chat-input-area input { flex-grow: 1; margin: 0 5px; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <h2 style="color: var(--kuwait-green);">يا هلا فيك بـ بوابة العاشر 🇰🇼</h2>
+        <p>الرجاء إدخال كلمة المرور للمتابعة</p>
+        <input type="password" id="passInput" placeholder="كلمة المرور...">
+        <br>
+        <button onclick="checkPass()">دخول</button>
+        <p id="error" style="color: red; display: none;">كلمة المرور غلط، حاول مرة ثانية!</p>
+    </div>
+
+    <div id="main-content">
+        <div class="header-kwt">
+            <h1>حياك الله يا بطل العاشر! 🇰🇼</h1>
+            <p>كل اللي تحتاجه من كتب وبنك أسئلة ودحيح (AI) بمكان واحد.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="files-section">
+                <h3>📚 المصادر الدراسية</h3>
+                <select id="fileSelector" onchange="updateIframe()" style="padding: 10px; width: 100%; margin-bottom: 10px;">
+                    <option value="https://example.com/islamic-grade10.pdf">كتاب التربية الإسلامية - الفصل الثاني</option>
+                    <option value="https://example.com/physics-bank-q.pdf">بنك أسئلة الفيزياء - الفصل الأول</option>
+                </select>
+                <iframe id="pdfViewer" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"></iframe>
+            </div>
+
+            <div class="chat-section">
+                <h3>🤖 اسأل الدحيح (AI)</h3>
+                <div class="chat-box">
+                    <div id="chat-messages">
+                        <div class="ai-msg">هلا والله! أنا مساعدك الذكي، اسألني أي شيء عن المنهج وابشر بسعدك.</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="userQuery" placeholder="اكتب سؤالك هنا...">
+                        <button onclick="askAI()">اسأل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // نظام الحماية
+        function checkPass() {
+            const pass = document.getElementById('passInput').value;
+            // بناءً على طلبك، كلمة السر هي ali
+            if (pass === "ali") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.body.style.alignItems = 'flex-start';
+                document.body.style.padding = '20px';
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // تحديث الملف المعروض
+        function updateIframe() {
+            const selector = document.getElementById('fileSelector');
+            document.getElementById('pdfViewer').src = selector.value;
+        }
+
+        // محاكي ذكاء اصطناعي متطور (يمكن ربطه بـ Gemini API أو GPT)
+        async function askAI() {
+            const query = document.getElementById('userQuery').value;
+            if(!query) return;
+
+            const chatMessages = document.getElementById('chat-messages');
+            
+            // إضافة رسالة المستخدم
+            chatMessages.innerHTML += `<div class="user-msg">${query}</div>`;
+            document.getElementById('userQuery').value = '';
+
+            // محاكاة تفكير الذكاء الاصطناعي
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'ai-msg';
+            loadingMsg.innerText = 'قاعد أفكر...';
+            chatMessages.appendChild(loadingMsg);
+
+            // هنا نستخدم وظيفة محاكاة للرد الذكي (في الواقع نربطها بـ API)
+            setTimeout(() => {
+                loadingMsg.innerText = "هذا سؤال ممتاز في منهج الصف العاشر! بخصوص " + query + "، الإجابة تعتمد على الكتاب، لكن نصيحتي لك تركز على النقاط الأساسية في المنهج الكويتي لهذا العام. هل تريد شرحاً مفصلاً لجزئية معينة؟";
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
