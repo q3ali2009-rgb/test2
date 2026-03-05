@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة العاشر - المنهج الكويتي</title>
+    <title>منصة العاشر الذكية 🇰🇼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --kuwait-red: #ce1126;
-            --kuwait-green: #007a3d;
-            --kuwait-black: #000000;
-            --gold: #d4af37;
+            --primary: #00d1b2;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Cairo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-main);
             margin: 0;
             display: flex;
             justify-content: center;
@@ -22,173 +24,178 @@
             min-height: 100vh;
         }
 
-        /* شاشة تسجيل الدخول */
+        /* شاشة الدخول */
         #login-screen {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
             text-align: center;
-            border-top: 5px solid var(--kuwait-green);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 350px;
         }
 
         input {
-            padding: 10px;
-            width: 80%;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            text-align: center;
         }
 
         button {
-            padding: 10px 25px;
-            background-color: var(--kuwait-green);
-            color: white;
+            background: var(--primary);
+            color: #0f172a;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            padding: 12px 30px;
+            border-radius: 12px;
             font-weight: bold;
+            cursor: pointer;
+            width: 100%;
         }
 
         /* المحتوى الرئيسي */
         #main-content {
             display: none;
-            width: 95%;
-            max-width: 1200px;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-        }
-
-        .header-kwt {
-            background: linear-gradient(to left, var(--kuwait-green), var(--kuwait-red));
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+            width: 95vw;
+            max-width: 1300px;
+            height: 90vh;
+            grid-template-columns: 1fr 400px;
             gap: 20px;
+            margin: 20px;
         }
 
-        .files-section iframe {
-            width: 100%;
-            height: 500px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-        }
-
-        /* صندوق الدردشة */
-        .chat-box {
-            border: 1px solid #ddd;
-            border-radius: 10px;
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            height: 500px;
-            background: #fafafa;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        #chat-messages {
+        iframe {
+            width: 100%;
+            flex-grow: 1;
+            border-radius: 12px;
+            border: none;
+            background: white;
+        }
+
+        /* تصميم الشات */
+        #chat-window {
             flex-grow: 1;
             overflow-y: auto;
-            padding: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 5px;
         }
 
-        .ai-msg { background: #e1ffc7; padding: 8px; border-radius: 5px; margin: 5px 0; }
-        .user-msg { background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 5px; margin: 5px 0; text-align: left; }
+        .msg { padding: 10px 15px; border-radius: 15px; max-width: 85%; line-height: 1.5; font-size: 0.95rem; }
+        .ai { background: #334155; align-self: flex-start; border-bottom-right-radius: 2px; }
+        .user { background: var(--primary); color: #0f172a; align-self: flex-end; border-bottom-left-radius: 2px; }
 
-        .chat-input-area { display: flex; padding: 10px; }
-        .chat-input-area input { flex-grow: 1; margin: 0 5px; }
+        .kwt-header {
+            grid-column: span 2;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(90deg, #007a3d, #ce1126);
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 850px) {
+            #main-content { grid-template-columns: 1fr; height: auto; }
+        }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
-        <h2 style="color: var(--kuwait-green);">يا هلا فيك بـ بوابة العاشر 🇰🇼</h2>
-        <p>الرجاء إدخال كلمة المرور للمتابعة</p>
+        <h1 style="font-size: 4rem; margin: 0;">🇰🇼</h1>
+        <h2>يا هلا بطل العاشر</h2>
+        <p>ادخل كلمة السر (alinasser)</p>
         <input type="password" id="passInput" placeholder="كلمة المرور...">
-        <br>
-        <button onclick="checkPass()">دخول</button>
-        <p id="error" style="color: red; display: none;">كلمة المرور غلط، حاول مرة ثانية!</p>
+        <button onclick="login()">دخول المنصة 🚀</button>
     </div>
 
     <div id="main-content">
-        <div class="header-kwt">
-            <h1>حياك الله يا بطل العاشر! 🇰🇼</h1>
-            <p>كل اللي تحتاجه من كتب وبنك أسئلة ودحيح (AI) بمكان واحد.</p>
+        <div class="kwt-header">
+            <h2 style="margin: 5px;">بوابة الصف العاشر - المنهج الكويتي 🇰🇼 ✨</h2>
         </div>
 
-        <div class="grid-container">
-            <div class="files-section">
-                <h3>📚 المصادر الدراسية</h3>
-                <select id="fileSelector" onchange="updateIframe()" style="padding: 10px; width: 100%; margin-bottom: 10px;">
-                    <option value="https://example.com/islamic-grade10.pdf">كتاب التربية الإسلامية - الفصل الثاني</option>
-                    <option value="https://example.com/physics-bank-q.pdf">بنك أسئلة الفيزياء - الفصل الأول</option>
-                </select>
-                <iframe id="pdfViewer" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"></iframe>
-            </div>
+        <div class="section">
+            <h3 style="margin-top: 0;">📚 الكتب وبنوك الأسئلة</h3>
+            <select onchange="document.getElementById('pdf').src = this.value" style="padding: 10px; margin-bottom: 10px; border-radius: 8px;">
+                <option value="https://kw-edu.com/files/view/10-islamic-t2.pdf">📖 إسلامية - الفصل الثاني</option>
+                <option value="https://kw-edu.com/files/view/10-physics-bank-t1.pdf">🔬 بنك أسئلة الفيزياء - الفصل الأول</option>
+            </select>
+            <iframe id="pdf" src="https://kw-edu.com/files/view/10-islamic-t2.pdf"></iframe>
+        </div>
 
-            <div class="chat-section">
-                <h3>🤖 اسأل الدحيح (AI)</h3>
-                <div class="chat-box">
-                    <div id="chat-messages">
-                        <div class="ai-msg">هلا والله! أنا مساعدك الذكي، اسألني أي شيء عن المنهج وابشر بسعدك.</div>
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" id="userQuery" placeholder="اكتب سؤالك هنا...">
-                        <button onclick="askAI()">اسأل</button>
-                    </div>
-                </div>
+        <div class="section">
+            <h3 style="margin-top: 0;">🤖 دحيح AI (Gemini 3)</h3>
+            <div id="chat-window">
+                <div class="msg ai">حياك الله! أنا ذكاء اصطناعي مربوط بـ Gemini 3 Flash. اسألني أي شي بالمنهج وابشر بسعدك! 🇰🇼🔥</div>
+            </div>
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="aiMsg" placeholder="اسأل الدحيح..." style="margin: 0;">
+                <button onclick="askGemini()" style="width: auto;">ارسل</button>
             </div>
         </div>
     </div>
 
     <script>
-        // نظام الحماية
-        function checkPass() {
-            const pass = document.getElementById('passInput').value;
-            // بناءً على طلبك، كلمة السر هي ali
-            if (pass === "ali") {
+        // مفتاحك اللي نسخته من الصورة (حطه هنا بين الكوتيشن)
+        const MY_API_KEY = "ضـع_مـفـتـاحـك_هـنـا"; 
+
+        function login() {
+            const p = document.getElementById('passInput').value;
+            if(p === "alinasser" || p === "ali") {
                 document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                document.body.style.alignItems = 'flex-start';
-                document.body.style.padding = '20px';
+                document.getElementById('main-content').style.display = 'grid';
             } else {
-                document.getElementById('error').style.display = 'block';
+                alert("الباسورد غلط يا وحش!");
             }
         }
 
-        // تحديث الملف المعروض
-        function updateIframe() {
-            const selector = document.getElementById('fileSelector');
-            document.getElementById('pdfViewer').src = selector.value;
-        }
+        async function askGemini() {
+            const input = document.getElementById('aiMsg');
+            const chat = document.getElementById('chat-window');
+            const userText = input.value;
+            if(!userText) return;
 
-        // محاكي ذكاء اصطناعي متطور (يمكن ربطه بـ Gemini API أو GPT)
-        async function askAI() {
-            const query = document.getElementById('userQuery').value;
-            if(!query) return;
-
-            const chatMessages = document.getElementById('chat-messages');
+            // عرض رسالة المستخدم
+            chat.innerHTML += `<div class="msg user">${userText}</div>`;
+            input.value = '';
             
-            // إضافة رسالة المستخدم
-            chatMessages.innerHTML += `<div class="user-msg">${query}</div>`;
-            document.getElementById('userQuery').value = '';
+            // رسالة انتظار
+            const tempId = "loading-" + Date.now();
+            chat.innerHTML += `<div class="msg ai" id="${tempId}">قاعد أفكر لك... 🤔</div>`;
+            chat.scrollTop = chat.scrollHeight;
 
-            // محاكاة تفكير الذكاء الاصطناعي
-            const loadingMsg = document.createElement('div');
-            loadingMsg.className = 'ai-msg';
-            loadingMsg.innerText = 'قاعد أفكر...';
-            chatMessages.appendChild(loadingMsg);
+            try {
+                // الربط مع موديل gemini-3-flash-preview اللي شفته بالصورة
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${MY_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: "أنت مساعد دراسي كويتي خبير. أجب باختصار وذكاء وبلهجة كويتية محببة مع إيموجيات على: " + userText }]}]
+                    })
+                });
 
-            // هنا نستخدم وظيفة محاكاة للرد الذكي (في الواقع نربطها بـ API)
-            setTimeout(() => {
-                loadingMsg.innerText = "هذا سؤال ممتاز في منهج الصف العاشر! بخصوص " + query + "، الإجابة تعتمد على الكتاب، لكن نصيحتي لك تركز على النقاط الأساسية في المنهج الكويتي لهذا العام. هل تريد شرحاً مفصلاً لجزئية معينة؟";
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1500);
+                const data = await response.json();
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                document.getElementById(tempId).innerText = aiResponse;
+            } catch (e) {
+                document.getElementById(tempId).innerText = "صار خطأ! تأكد إنك حطيت الـ API Key صح في الكود.";
+            }
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
 </body>
