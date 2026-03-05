@@ -4,75 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة العاشر الذكية 🇰🇼</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00d1b2; --bg: #0f172a; --card: #1e293b; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: white; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        
-        /* شاشة الدخول */
-        #login-screen { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; width: 320px; border: 2px solid var(--primary); }
-        input { width: 90%; padding: 12px; margin: 15px 0; border-radius: 10px; border: none; background: #0f172a; color: white; text-align: center; }
-        button { background: var(--primary); color: #0f172a; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent: #ff4b2b;
+            --bg: #0b0e14;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-        /* المحتوى */
-        #main-content { display: none; width: 95vw; height: 90vh; grid-template-columns: 1fr 380px; gap: 20px; padding: 20px; }
-        .box { background: var(--card); border-radius: 15px; padding: 15px; display: flex; flex-direction: column; overflow: hidden; }
-        .header { grid-column: span 2; background: linear-gradient(90deg, #007a3d, #ce1126); padding: 10px; border-radius: 15px; text-align: center; }
-        
-        iframe { width: 100%; flex-grow: 1; border-radius: 10px; background: white; border: none; }
-        
-        /* الشات */
-        #chat-window { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 10px; }
-        .msg { padding: 10px; border-radius: 12px; max-width: 80%; font-size: 0.9rem; line-height: 1.4; }
-        .ai { background: #334155; align-self: flex-start; }
-        .user { background: var(--primary); color: #0f172a; align-self: flex-end; }
-        
-        @media (max-width: 850px) { #main-content { grid-template-columns: 1fr; } .header { grid-column: span 1; } }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at top right, #1a1f35, #0b0e14);
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- شاشة الدخول المبتكرة --- */
+        #login-screen {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            width: 350px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .login-logo { font-size: 5rem; margin-bottom: 10px; display: block; }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        input:focus { outline: 2px solid var(--primary); background: rgba(255,255,255,0.15); }
+
+        .btn-enter {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn-enter:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(79, 172, 254, 0.5); }
+
+        /* --- الواجهة الرئيسية المحسنة --- */
+        #main-content {
+            display: none;
+            width: 95vw;
+            height: 92vh;
+            grid-template-columns: 1.2fr 450px;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+            padding: 15px;
+        }
+
+        .top-bar {
+            grid-column: span 2;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .status-badge {
+            background: rgba(0, 255, 127, 0.1);
+            color: #00ff7f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid #00ff7f;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* --- قسم الكتب --- */
+        .pdf-viewer-wrap {
+            flex-grow: 1;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 5px solid rgba(255,255,255,0.05);
+        }
+
+        .book-select {
+            background: #1a1f35;
+            color: white;
+            border: 1px solid var(--primary);
+            padding: 12px;
+            border-radius: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        /* --- قسم الـ AI (محيط المحادثة) --- */
+        #chat-window {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .bubble {
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            animation: slideIn 0.3s ease;
+        }
+
+        .ai-bubble { background: rgba(255,255,255,0.1); align-self: flex-start; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+        .user-bubble { background: linear-gradient(45deg, var(--secondary), var(--primary)); color: #000; align-self: flex-end; border-bottom-left-radius: 4px; font-weight: 600; }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 18px;
+        }
+
+        .chat-input-container input { margin: 0; background: transparent; text-align: right; padding: 10px; }
+        .btn-send { background: var(--primary); border: none; border-radius: 12px; width: 50px; cursor: pointer; color: #000; font-weight: bold; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* موبايل */
+        @media (max-width: 950px) {
+            #main-content { grid-template-columns: 1fr; height: auto; }
+            .top-bar { flex-direction: column; gap: 10px; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
-        <h1 style="margin:0">🇰🇼</h1>
-        <h2>دخول المنصة</h2>
+        <span class="login-logo">🇰🇼</span>
+        <h2 style="margin: 0; font-weight: 800;">بوابة دحيح العاشر</h2>
+        <p style="opacity: 0.7;">ادخل كلمة السر للمتابعة</p>
         <input type="password" id="passInput" placeholder="كلمة المرور (alinasser)">
-        <button onclick="login()">دخول 🚀</button>
+        <button class="btn-enter" onclick="login()">دخول المنصة 🚀</button>
+        <p id="error" style="color: var(--accent); display: none; margin-top: 15px; font-weight: bold;">❌ الرمز غلط، جرب مرة ثانية!</p>
     </div>
 
     <div id="main-content">
-        <div class="header"><h3>منصة العاشر - المنهج الكويتي 🇰🇼 ✨</h3></div>
-
-        <div class="box">
-            <h4 style="margin:0 0 10px 0">📚 الكتب والملفات</h4>
-            <select onchange="document.getElementById('pdf').src = this.value" style="width:100%; padding:8px; border-radius:5px; margin-bottom:10px;">
-                <option value="https://docs.google.com/viewer?embedded=true&url=https://kw-edu.com/files/view/10-islamic-t2.pdf">📖 تربية إسلامية - الفصل الثاني</option>
-                <option value="https://docs.google.com/viewer?embedded=true&url=https://kw-edu.com/files/view/10-physics-bank-t1.pdf">🔬 بنك أسئلة الفيزياء - الفصل الأول</option>
-            </select>
-            <iframe id="pdf" src="https://docs.google.com/viewer?embedded=true&url=https://kw-edu.com/files/view/10-islamic-t2.pdf"></iframe>
+        <div class="top-bar">
+            <h2 style="margin: 0; font-size: 1.3rem;">🇰🇼 منصة المنهج الكويتي الذكية</h2>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <span class="status-badge">● متصل بالذكاء الاصطناعي</span>
+                <button onclick="location.reload()" style="background:none; border:none; color:white; cursor:pointer;">خروج 🚪</button>
+            </div>
         </div>
 
-        <div class="box">
-            <h4 style="margin:0 0 10px 0">🤖 دحيح AI (Gemini 3 Flash)</h4>
-            <div id="chat-window">
-                <div class="msg ai">هلا بك! أنا ذكاء اصطناعي مربوط بموديل **Gemini 3 Flash** المتطور. اسألني أي شي عن منهجك وابشر بسعدك! 🇰🇼🔥</div>
+        <div class="card">
+            <div class="card-title"><span>📚</span> المصادر والكتب الدراسية</div>
+            <select class="book-select" onchange="document.getElementById('pdf').src = this.value">
+                <option value="https://docs.google.com/viewer?embedded=true&url=https://kw-edu.com/files/view/10-islamic-t2.pdf">📖 تربية إسلامية - الصف العاشر - الفصل الثاني</option>
+                <option value="https://docs.google.com/viewer?embedded=true&url=https://kw-edu.com/files/view/10-physics-bank-t1.pdf">🔬 بنك أسئلة الفيزياء - الفصل الأول (محلول)</option>
+            </select>
+            <div class="pdf-viewer-wrap">
+                <iframe id="pdf" src="https://docs.google.com/viewer?embedded=true&url=https://kw-edu.com/files/view/10-islamic-t2.pdf"></iframe>
             </div>
-            <div style="display:flex; gap:5px">
-                <input type="text" id="aiMsg" placeholder="اسألني شي..." style="margin:0">
-                <button onclick="askAI()" style="width:auto">ارسل</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><span>🤖</span> دحيح AI (Gemini 3 Flash)</div>
+            <div id="chat-window">
+                <div class="bubble ai-bubble">يا هلا والله بطل العاشر! 🇰🇼<br>أنا مساعدك الذكي المربوط بموديل Gemini العالمي. شنو ودك نشرح اليوم؟</div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="aiMsg" placeholder="اكتب سؤالك هنا..." onkeypress="if(event.key==='Enter') askAI()">
+                <button class="btn-send" onclick="askAI()">◀</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ⚠️ حط المفتاح اللي نسخته من الصورة هنا بدال النجوم
+        // --- حط مفتاح الـ API هنا ---
         const API_KEY = "ضـع_مـفـتـاحـك_هـنـا"; 
 
         function login() {
             const p = document.getElementById('passInput').value;
+            // التحقق من كلمة المرور
             if(p === "alinasser" || p === "ali") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'grid';
-            } else { alert("الباسورد غلط!"); }
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
         }
 
         async function askAI() {
@@ -80,21 +252,20 @@
             const chat = document.getElementById('chat-window');
             if(!input.value) return;
 
-            const userTxt = input.value;
-            chat.innerHTML += `<div class="msg user">${userTxt}</div>`;
+            const userText = input.value;
+            chat.innerHTML += `<div class="bubble user-bubble">${userText}</div>`;
             input.value = '';
             
-            const tempId = "loading-" + Date.now();
-            chat.innerHTML += `<div class="msg ai" id="${tempId}">قاعد أكتب لك الرد... ✍️</div>`;
+            const tempId = "load-" + Date.now();
+            chat.innerHTML += `<div class="bubble ai-bubble" id="${tempId}">جاري التفكير... 🧠</div>`;
             chat.scrollTop = chat.scrollHeight;
 
             try {
-                // استخدام رابط الـ API المتوافق مع المتصفحات
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: "أنت مساعد دراسي كويتي ذكي جداً، تجيب بوضوح وإيموجيات وبلهجة كويتية خفيفة: " + userTxt }]}]
+                        contents: [{ parts: [{ text: "أنت مساعد دراسي كويتي خبير جداً، اسمك (دحيح AI). أجب بذكاء واحترافية وإيموجيات وبلهجة كويتية راقية على: " + userText }]}]
                     })
                 });
 
@@ -102,7 +273,7 @@
                 const aiRes = data.candidates[0].content.parts[0].text;
                 document.getElementById(tempId).innerText = aiRes;
             } catch (e) {
-                document.getElementById(tempId).innerText = "صار خطأ! تأكد من وضع الـ API Key بشكل صحيح في الكود.";
+                document.getElementById(tempId).innerText = "أعتذر منك، يبدو أن هناك مشكلة في الاتصال بالمخ الذكي (API Key).";
             }
             chat.scrollTop = chat.scrollHeight;
         }
